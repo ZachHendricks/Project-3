@@ -47,3 +47,42 @@ def getGender():
     
 getHeartAttack()
 getGender()
+
+
+def getEKG():
+    print('EKG type:')
+    print('    0 - EKG was normal')
+    print('    1 - EKG had an abnormalitiy with the ST-T Wave')
+    print('    2 - EKG had an abnormality in the Left ventricular')
+    #find percentages
+    EKG0 = data[(data.restecg == 0) & (data.attack == 1)]
+    EKG0count = data[(data.restecg == 0)]
+    EKG0percent = (len(EKG0) / len(EKG0count)) * 100
+    
+    EKG1 = data[(data.restecg == 1) & (data.attack == 1)]
+    EKG1count = data[(data.restecg == 1)]
+    EKG1percent = (len(EKG1) / len(EKG1count)) * 100
+    
+    EKG2 = data[(data.restecg == 2) & (data.attack == 1)]
+    EKG2count = data[(data.restecg == 2)]
+    EKG2percent = (len(EKG2) / len(EKG2count)) * 100
+    
+    #print statements
+    print('Resting EKG Type 0 had this percent of heart attack: %0.2f%%' % EKG0percent)
+    print('Resting EKG Type 1 had this percent of heart attack: %0.2f%%' % EKG1percent)
+    print('Resting EKG Type 2 had this percent of heart attack: %0.2f%%' % EKG2percent)
+    
+    #make plot
+    plot_data = [EKG0percent, EKG1percent, EKG2percent]
+    labels = ["Normal", "Abnormal ST-T Wave", "Abnormal Left Ventricular"]
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    ax.bar(labels, plot_data, color = "darkred")
+    ax.set_xlabel('EKG Type')
+    ax.set_ylabel('Percent')
+    ax.set_title('Percent Heart Attack by Resting EKG')
+    fig.savefig('EKG.png', bbox_inches = 'tight')
+    plt.show()
+
+getEKG()
+    
