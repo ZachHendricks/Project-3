@@ -86,3 +86,32 @@ def getEKG():
 
 getEKG()
     
+def getExercise():
+    #find percentages
+    Exer = data[(data.exng == 1) & (data.attack == 1)]
+    Exercount = data[(data.exng == 1)]
+    Exerpercent = (len(Exer) / len(Exercount)) * 100
+
+    
+    NoExer = data[(data.exng == 0) & (data.attack == 1)]
+    NoExercount = data[(data.exng == 0)]
+    NoExerpercent = (len(NoExer) / len(NoExercount)) * 100
+    
+    #print statements
+    print('Percent who Exercised and had a heart attack: %0.2f%%' % Exerpercent)
+    print('Percent with No Exercise and had a heart attack: %0.2f%%' %  NoExerpercent)
+    
+    #make plot
+    plot_data = [Exerpercent, NoExerpercent]
+    labels = ["Yes", "No"]
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    ax.bar(labels, plot_data, color = "purple")
+    ax.set_xlabel('Exercise')
+    ax.set_ylabel('Percent')
+    ax.set_title('Percent Heart Attack if Exercising')
+    fig.savefig('Exercise.png', bbox_inches = 'tight')
+    plt.show()
+ 
+getExercise()
+    
