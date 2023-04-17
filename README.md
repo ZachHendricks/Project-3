@@ -1,5 +1,5 @@
 # Project-3
-#Zach Hendricks
+#Zach Hendricks, Carter Barnes
 
 #Main
 from Utilities import *
@@ -32,6 +32,8 @@ import matplotlib.pyplot as plt
 data = pd.read_csv('heart.csv')
 
 def getHeartAttack():
+     """This function describes the amount of people in the dataset who had a heart attack and
+    the amount who haven't as a percentage"""
     #Get the heart attack probability
     Heart_Attack_mean = (data.attack.mean())
     #Take the probability and subtract 1
@@ -51,6 +53,8 @@ def getHeartAttack():
     fig.savefig("HeartAttack.png", bbox_inches = "tight")
 
 def getGender():
+      """This function describes the percentage of men who have had heart atacks and the
+    percentage of women who have had a heart attack"""
     #Get the data for females with heart attacks
     Female_HA = data[(data.sex == 1) & (data.attack == 1)]
     #Now calculate the percentage
@@ -71,6 +75,8 @@ def getGender():
     fig.savefig("Gender.png", bbox_inches = "tight")
     
 def getChestPain():
+     """This function describes different types of chest pains associated with heart
+    attacks and the liklelihood of a heart attack given that chest pain"""
     #Get the data for all of the different chest pains
     #CP 0
     Chest_Pain_0 = data[(data.cp == 0) & (data.attack == 1)]
@@ -138,6 +144,8 @@ def getChestPain():
     plt.show()
     
 def getBloodSugar():
+       """This function uses information related to blood sugar in the dataset and gives
+    the percentage of having a heart attack given regular blood sugar or high blood sugar"""
     #FIND %
     FBS0 = data[(data.fbs == 0) & (data.attack == 1)]
     FBS0count = data[(data.fbs ==0)]
@@ -164,6 +172,8 @@ def getBloodSugar():
     plt.show()
     
 def getEKG():
+      """This funciton uses EKG types to determine the likelihood of a heart attack using 
+    the given data"""
     print('EKG type:')
     print('    0 - EKG was normal')
     print('    1 - EKG had an abnormalitiy with the ST-T Wave')
@@ -199,6 +209,8 @@ def getEKG():
     plt.show()
 
 def getExercise():
+     """This function determines the likelihood of a heart attack given whether or not
+    someone exercises regularly"""
     #find percentages
     Exer = data[(data.exng == 1) & (data.attack == 1)]
     Exercount = data[(data.exng == 1)]
